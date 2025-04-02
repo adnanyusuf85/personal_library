@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="font-awesome-4.7.0\css\font-awesome.min.css">
+
+    <title>The Reading List</title>
+</head>
+<body>
+    <header>
+        <h1 class="lg-heading">The Reading List</h1>
+    </header>
+    <main>
+        <button id="add-book-button"><i class="fa fa-plus" aria-hidden="true"></i>
+            <span>Add Book</span></button>
+        <div id="main-divider">
+            <ul id="reading-list">
+            
+            </ul>
+        </div>
+        
+    </main>
+    <div id="editor-bg" onclick="closeBookAdditionForm()">
+        <div id="editor" onclick="checkClick(this,event)">
+
+        </div>
+    </div>
+    <footer>
+        Developed by Adnan Yusuf
+    </footer>
+</body>
+<script src="script.js"></script>
+</html>
