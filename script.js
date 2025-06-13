@@ -1,4 +1,4 @@
-var myLibrary = [];
+
 
 
 reading_list=document.getElementById("reading-list");
@@ -64,27 +64,50 @@ class Book{
     }
 };
 
+class Library{
+    #assets = [];
+    addBook(book){
+        try{
+            this.#assets.push(book);
+            return true;
+        }
+        catch{
+            return false;
+        }
+    }
+    removeBook(bookUUID){
+        let bookLocationInAssets = this.#assets.findIndex(book => book.bookId === bookUUID)
+        this.#assets.splice(bookLocationInAssets,1);
+        console.log(this.#assets);
+    }
+    getBooksList(){
+        return this.#assets;
+    }
 
-
-function addBookToLibrary(book){
-    if (book instanceof Book)
-        myLibrary.push(book);
-    renderLibrary();
 }
+
+var myLibrary = new Library();
+
 
 function addBookToLibraryFromForm(e,form_name)
 {
-    //e.preventDefault();
+
     var form = document.getElementById(form_name);
     var title = form.elements["title"].value;
     var author = form.elements["author"].value;
     var pubyear = form.elements["pubyear"].value;
-    addBookToLibrary(new Book(title,author,pubyear));
-    event.cancelBubble = true;
+    var result = myLibrary.addBook(new Book(title,author,pubyear));
+    if (result){
+        renderLibrary();
+    }
+    else{
+        window.alert("Error adding book. Try again later.");
+    }
+    closeBookAdditionForm();
 }
 
 function removeBookFromLibrary(bookId){
-    myLibrary = myLibrary.filter(book => book.bookId !== bookId);
+    myLibrary.removeBook(bookId);
     renderLibrary();
 }
 
@@ -166,7 +189,7 @@ function closeBookAdditionForm(){
 
 function renderLibrary(){
     reading_list.innerHTML = "";
-    myLibrary.forEach(book =>{
+    myLibrary.getBooksList().forEach(book =>{
         var li = document.createElement('li');
         li.classList.add('book-list-item');
 
@@ -249,13 +272,13 @@ function doNothing(){
     stopPro
 }
 
-addBookToLibrary(new Book("1984", "George Orwell", 1949));
-addBookToLibrary(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
-addBookToLibrary(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
-addBookToLibrary(new Book("Moby-Dick", "Herman Melville", 1851));
-addBookToLibrary(new Book("Pride and Prejudice", "Jane Austen", 1813));
-addBookToLibrary(new Book("The Catcher in the Rye", "J.D. Salinger", 1951));
-addBookToLibrary(new Book("Brave New World", "Aldous Huxley", 1932));
-addBookToLibrary(new Book("The Hobbit", "J.R.R. Tolkien", 1937));
+myLibrary.addBook(new Book("1984", "George Orwell", 1949));
+myLibrary.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 1960));
+myLibrary.addBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925));
+myLibrary.addBook(new Book("Moby-Dick", "Herman Melville", 1851));
+myLibrary.addBook(new Book("Pride and Prejudice", "Jane Austen", 1813));
+myLibrary.addBook(new Book("The Catcher in the Rye", "J.D. Salinger", 1951));
+myLibrary.addBook(new Book("Brave New World", "Aldous Huxley", 1932));
+myLibrary.addBook(new Book("The Hobbit", "J.R.R. Tolkien", 1937));
 
-
+renderLibrary();
