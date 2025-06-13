@@ -8,16 +8,56 @@ add_book_button.addEventListener('click',(e)=>openBookAdditionForm(e));
 const book_valid = {
     valid : true
 };
-function Book(title, author, year){
-    this.bookId = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.year = year;
-    this.read = false;
-    this.toggleStatus = function() {
-        this.read = !this.read;
+
+class Book{
+    #title;
+    #author;
+    #year;
+    #read;
+    constructor(_title, _author, _year){
+        this.bookId = crypto.randomUUID();
+        this.#title = _title;
+        this.#author = _author;
+        this.#year = _year;   
+        this.#read = false;
     }
-}
+
+    get title(){
+        return this.#title;
+    }
+
+    set title(_title){
+        this.#title = _title;
+    }
+
+    get author(){
+        return this.#author;
+    }
+
+    set author(_author){
+        this.#author = _author;
+    }
+
+    get year(){
+        return this.#year;
+    }
+
+    set year(_year){
+        this.#year = _year;
+    }
+
+    get isRead(){
+        return this.#read;
+    }
+
+    set isRead(flag){
+        this.#read = flag;
+    }
+
+    ToggleRead(){
+        this.isRead(!this.#read);
+    }
+};
 
 
 
