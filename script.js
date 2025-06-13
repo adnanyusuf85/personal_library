@@ -112,13 +112,13 @@ function removeBookFromLibrary(bookId){
 }
 
 function mark_read(bookId){
-    var the_book = myLibrary.filter(book => book.bookId == bookId)[0];
+    var the_book = myLibrary.getBooksList().filter(book => book.bookId == bookId)[0];
     the_book.read = true;
     renderLibrary();
 }
 
 function mark_unread(bookId){
-    var the_book = myLibrary.filter(book => book.bookId == bookId)[0];
+    var the_book = myLibrary.getBooksList().filter(book => book.bookId == bookId)[0];
     the_book.read = false;
     renderLibrary();
 }
