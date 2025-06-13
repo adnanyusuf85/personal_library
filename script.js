@@ -10,16 +10,21 @@ const book_valid = {
 };
 
 class Book{
+    #bookId;
     #title;
     #author;
     #year;
     #read;
     constructor(_title, _author, _year){
-        this.bookId = crypto.randomUUID();
+        this.#bookId = crypto.randomUUID();
         this.#title = _title;
         this.#author = _author;
         this.#year = _year;   
         this.#read = false;
+    }
+
+    get bookId(){
+        return this.#bookId;
     }
 
     get title(){
